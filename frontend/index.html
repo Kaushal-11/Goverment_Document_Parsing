@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID Card Info Extractor</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Goverment Document Card Extractor</h1>
+            </div>
+        </header>
+
+        <main>
+            <div class="tabs">
+                <button class="tab-btn active" data-target="aadhaar">
+                    Aadhaar Card
+                </button>
+                <button class="tab-btn" data-target="pan">
+                    PAN Card
+                </button>
+            </div>
+
+            <div class="card-container">
+                <div class="tab-content active" id="aadhaar-content">
+                    <div class="upload-section">
+                        <h2>Upload Aadhaar Card</h2>
+                        <p>Please upload your Aadhaar card as a PDF document</p>
+                        
+                        <div class="upload-area" id="aadhaar-upload">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & Drop your PDF here or click to browse</p>
+                            <input type="file" id="aadhaar-file" accept=".pdf" hidden>
+                        </div>
+                        
+                        <div class="file-info" id="aadhaar-file-info">
+                            <p><span id="aadhaar-filename">No file selected</span></p>
+                            <button class="extract-btn" id="aadhaar-extract-btn" disabled>
+                                <i class="fas fa-search"></i> Extract Information
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="loader" id="aadhaar-loader">
+                        <div class="spinner"></div>
+                        <p>Extracting information...</p>
+                    </div>
+
+                    <div class="results" id="aadhaar-results">
+                        <h2>Extracted Information</h2>
+                        <div class="result-card">
+                            <div class="result-field">
+                                <span class="field-label">Name:</span>
+                                <span class="field-value" id="aadhaar-name">-</span>
+                            </div>
+                            <div class="result-field">
+                                <span class="field-label">Date of Birth:</span>
+                                <span class="field-value" id="aadhaar-dob">-</span>
+                            </div>
+                            <div class="result-field">
+                                <span class="field-label">Gender:</span>
+                                <span class="field-value" id="aadhaar-gender">-</span>
+                            </div>
+                            <div class="result-field">
+                                <span class="field-label">Aadhaar Number:</span>
+                                <span class="field-value" id="aadhaar-number">-</span>
+                            </div>
+                            <div class="result-field">
+                                <span class="field-label">Address:</span>
+                                <span class="field-value" id="aadhaar-address">-</span>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="action-btn" id="aadhaar-copy-btn">
+                                <i class="fas fa-copy"></i> Copy to Clipboard
+                            </button>
+                            <button class="action-btn" id="aadhaar-download-btn">
+                                <i class="fas fa-download"></i> Download as JSON
+                            </button>
+                            <button class="action-btn reset-btn" id="aadhaar-reset-btn">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="pan-content">
+                    <div class="upload-section">
+                        <h2>Upload PAN Card</h2>
+                        <p>Please upload your PAN card as a PDF document</p>
+                        
+                        <div class="upload-area" id="pan-upload">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & Drop your PDF here or click to browse</p>
+                            <input type="file" id="pan-file" accept=".pdf" hidden>
+                        </div>
+                        
+                        <div class="file-info" id="pan-file-info">
+                            <p><span id="pan-filename">No file selected</span></p>
+                            <button class="extract-btn" id="pan-extract-btn" disabled>
+                                <i class="fas fa-search"></i> Extract Information
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="loader" id="pan-loader">
+                        <div class="spinner"></div>
+                        <p>Extracting information...</p>
+                    </div>
+
+                    <div class="results" id="pan-results">
+                        <h2>Extracted Information</h2>
+                        <div class="result-card">
+                            <div class="result-field">
+                                <span class="field-label">Name:</span>
+                                <span class="field-value" id="pan-name">-</span>
+                            </div>
+                            <div class="result-field">
+                                <span class="field-label">Father's Name:</span>
+                                <span class="field-value" id="pan-father-name">-</span>
+                            </div>
+                            <div class="result-field">
+                                <span class="field-label">Date of Birth:</span>
+                                <span class="field-value" id="pan-dob">-</span>
+                            </div>
+                            <div class="result-field">
+                                <span class="field-label">PAN Number:</span>
+                                <span class="field-value" id="pan-number">-</span>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="action-btn" id="pan-copy-btn">
+                                <i class="fas fa-copy"></i> Copy to Clipboard
+                            </button>
+                            <button class="action-btn" id="pan-download-btn">
+                                <i class="fas fa-download"></i> Download as JSON
+                            </button>
+                            <button class="action-btn reset-btn" id="pan-reset-btn">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Goverment Document Card Extractor. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification">
+        <p id="notification-text"></p>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
